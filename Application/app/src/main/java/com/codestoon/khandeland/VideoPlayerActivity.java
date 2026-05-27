@@ -6,6 +6,8 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
@@ -94,6 +96,8 @@ public class VideoPlayerActivity extends AppCompatActivity {
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
+
+
     }
 
     private void initViews() {
@@ -358,6 +362,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 if (progressBar != null) progressBar.setVisibility(View.GONE);
                 if (tvLoadingText != null) tvLoadingText.setVisibility(View.GONE);
                 markVideoAsWatched();
+                new Handler(android.os.Looper.getMainLooper()).postDelayed(() -> enterFullscreen(), 500);
             }
 
             @Override

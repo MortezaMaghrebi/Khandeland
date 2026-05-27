@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -73,10 +74,20 @@ public class MainActivity extends AppCompatActivity {
 
     private WatchHistoryManager historyManager;
     private LinearLayout bannerAdContainer;
+    private Parcelable recyclerViewState;
+    private Parcelable playlistRecyclerViewState;
+
     @Override
     protected void onPause() {
         lastPauseTime = System.currentTimeMillis();
         super.onPause();
+        // ذخیره موقعیت اسکرول قبل از خروج
+        if (recyclerView != null && recyclerView.getLayoutManager() != null) {
+            recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
+        }
+        if (rvPlaylists != null && rvPlaylists.getLayoutManager() != null) {
+            playlistRecyclerViewState = rvPlaylists.getLayoutManager().onSaveInstanceState();
+        }
     }
 
     @Override
@@ -90,8 +101,31 @@ public class MainActivity extends AppCompatActivity {
         if (!isOnHomePage) {
             updateHeroWithLastWatched();
         }
+        // ریفرش آداپتورها بدون از دست دادن موقعیت
+        refreshAdaptersWithoutScrolling();
     }
 
+    private void refreshAdaptersWithoutScrolling() {
+        // به روز رسانی Hero
+        updateHeroWithLastWatched();
+
+        // ریفرش آداپتور پلی‌لیست‌ها با حفظ موقعیت
+        if (playlistAdapter != null) {
+            playlistAdapter.notifyItemRangeChanged(0, playlistAdapter.getItemCount());
+            // بازیابی موقعیت
+            if (playlistRecyclerViewState != null && rvPlaylists != null) {
+                rvPlaylists.getLayoutManager().onRestoreInstanceState(playlistRecyclerViewState);
+            }
+        }
+
+        // ریفرش آداپتور ویدیو با حفظ موقعیت
+        if (videoAdapter != null && currentPlaylist != null) {
+            videoAdapter.notifyItemRangeChanged(0, videoAdapter.getItemCount());
+            if (recyclerViewState != null && recyclerView != null) {
+                recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -429,6 +463,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra(VideoPlayerActivity.EXTRA_VIDEO_THUMBNAIL, thumbnail);
                         intent.putExtra(VideoPlayerActivity.EXTRA_VIDEO_DURATION, duration);
                         intent.putExtra(VideoPlayerActivity.EXTRA_PLAYLIST_NAME, currentPlaylist.getName());
+
                         startActivity(intent);
                     }
                 });
