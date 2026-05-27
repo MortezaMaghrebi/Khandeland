@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         historyManager = new WatchHistoryManager(this);  // اضافه کنید
 
         initViews();
-        ShowInstagramMode();
+        ShowListMode();
         loadPlaylistsFromAssets();
         setupHomePage();
         setupListPage();

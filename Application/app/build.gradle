@@ -39,7 +39,7 @@ android {
                     marketBindAddress: "${marketBindAddress}",
                     marketPermission: "${marketApplicationId}.BILLING"
             ]
-            buildConfigField "String", "IAB_PUBLIC_KEY", "\"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCb2XB7dmFB3vAHgEEc/9CwTCw8hOb4ojgX/hyOCJ7Q6AxN0GOxhmi2NjLCXiQwMr2R+jb9109fHXXK0NHikcmWCiW6TsrYWvgAUzLKNvBoipJ+C59AD0M+Mvia9QGMeOu+4ieTivxABXb2yh8RlwQETP4wXFIRdMt3gEaoB8Pj4wIDAQAB\""
+            buildConfigField "String", "IAB_PUBLIC_KEY", "\"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC4McqwW6NWeczr0rf1B3IhWBT0fiDVN9T6RKGuyYJNOVzd2Sq6oJZPf8fz33mkYaAQ0W2fLl3SJeJBY5YLaT2EX/JINtm1FlpZGtjDcy9umbbYCF6+/XV8/PWgkCQBJF5UC5/xqyuV10q3Gmxvopax4pX+yCmHPGVbK4nvTWVaQwIDAQAB\""
             buildConfigField "String", "STORE_NAME", "\"myket\""
         }
 
@@ -56,7 +56,7 @@ android {
                     marketBindAddress: "${marketBindAddress}",
                     marketPermission: "com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR"
             ]
-            buildConfigField "String", "IAB_PUBLIC_KEY", "\"MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwDJj5btdckeUJuSXWBdGmdjH3YInXmtKfM8hCP19qnTUhYFbiZj5ql0AohAT0MqefZRqjlWctMfhBqbbuJcEpnSh9C3qL030zFaPT+VPSfrfMdN0zf4vXltRxiZZE0fYM0BX+SABEWs0NjTE9QqQ5e5yj/NoIDoQEh38niweLshL7PA/GGqF1k8VP2C0B7nrandcitxgMQNKfaeTxNScd1t+LgT/rORsaddxuaiX7sCAwEAAQ==\""
+            buildConfigField "String", "IAB_PUBLIC_KEY", "\"MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwDOcMMQiGkupV074OAqqG8KSWzI0Uash8mqgEVJ5PxTROeI5J7xp0KVsqNDrMC1RJEJDfSxy/OMIrc/o695VgRZ1+ZnVX9zjPjASpQO10szQXLvwyOMR3dog0j9WmNMtHwglM59v4cDbAAU3+P+YtSWv5id9tYRNlALyvWaJmt0cR7623E4V6tMxz4VYHffuNd/BZPNFUQG0AeUNsEWELqPhBQEeQSDCNmWlLErdV8CAwEAAQ==\""
             buildConfigField "String", "STORE_NAME", "\"bazaar\""
         }
     }
@@ -83,9 +83,7 @@ dependencies {
     implementation libs.material
     implementation libs.activity
     implementation libs.constraintlayout
-    testImplementation libs.junit
-    androidTestImplementation libs.ext.junit
-    androidTestImplementation libs.espresso.core
+
     //new added
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
